@@ -65,8 +65,7 @@ int main() {
 					system("pause");
 					system("cls");
 					break;
-			
-      case 2:
+				case 2:
 					system("cls");
 
 					printf("\t\t**Voce selecionou Adiconar via arquivo**\n\n");
@@ -106,8 +105,7 @@ int main() {
 				printf("\t\t**Nenhum aluno no sistema**\n\n");
 				system("pause");
 				system("cls");
-				
-        break;
+				break;
 
 
 			}
@@ -140,8 +138,7 @@ int main() {
 
 			system("pause");
 			system("cls");
-			
-      break;
+			break;
 
 		case 3:
 			if (i == 0) {
@@ -149,8 +146,7 @@ int main() {
 				printf("\t\t**Nenhum aluno no sistema**\n\n");
 				system("pause");
 				system("cls");
-				
-        break;
+				break;
 
 
 
@@ -175,8 +171,7 @@ int main() {
 				printf("\t\t**Nenhum aluno no sistema**\n\n");
 				system("pause");
 				system("cls");
-				
-        break;
+				break;
 
 
 			}
@@ -197,7 +192,9 @@ int main() {
 				scanf("%s", files);
 				arquivo = fopen(files, "w");
 				if (arquivo == NULL) {
-					printf("Problemas na abertura do arquivo\n");
+					printf("Problemas na criacao do arquivo\n");
+					system("pause");
+					system("cls");
 					continue;
 				}
 				else {
@@ -242,8 +239,7 @@ int main() {
 
 
 					printf("Aluno excluido!\n");
-					
-          break;
+					break;
 				}
 			}
 
@@ -268,8 +264,7 @@ int main() {
 				scanf("%d", &s2);
 				if (s2 == 1) {
 					printf("\t\t**PROGRAMA FINALIZADO**\n\n");
-					
-          break;
+					break;
 
 				}
 				if (s2 == 2) {
