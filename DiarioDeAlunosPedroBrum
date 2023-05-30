@@ -1,0 +1,304 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+struct sistema
+{
+	int matricula;
+	float n1, n2, n3, n4, nf;
+	char nome[30];
+
+
+
+};
+int main() {
+	char files[100];// variavel para adicionar o nome do arquivo
+	FILE* arquivo;
+	int s, s2;// variaveis para ifs do sair
+
+	struct sistema sis[60];
+	int o = 0, a = 0, i = 0, j = 0, k = 0; // o=switch case do menu de opcoes, a= switch case da primeira opcao(teclad/arquivo)
+	//i,j,k indices do vetores q usei ao longo do programa, i e o vetor geral, j e o vetor de localizacao, k vetor de exclusao
+
+	while (o != 6) { //repeticao geral do programa
+		int r2 = 0; //variavel de repeticao do while da 1 opcao
+		int aluno = 0; // variavel q determina se ha alunos ou nao
+
+
+		printf("\t\t*DIARIO DE ALUNOS MATRICULADOS NUMA DISCIPLINA*\n\n");
+		printf("Escolha uma das opcoes abaixo:\n1)Adicionar\n2)Pesquisar\n3)Listar\n4)Salvar as informacoes em um arquivo texto (.txt)\n5)Excluir\n6)Fechar o programa\n\n");
+		printf("Opcao:");
+		scanf("%d", &o);
+		switch (o) {
+		case 1:
+			while (r2 < 1) {
+				system("cls");
+				printf("\t\t**Voce selecionou Adiconar**\\n\n");
+				printf("Escolha uma das opcoes abaixo:\n1)Adicionar via teclado\n2)Adicionar via .txt\n \n ");
+				printf("Opcao:");
+				scanf("%d", &a);
+
+				switch (a) {
+
+
+				case 1:
+					system("cls");
+
+					printf("\t\t**Voce selecionou Adiconar via teclado**\n\n");
+					printf("Digite a matricula do aluno:");
+					scanf("%d", &sis[i].matricula);
+					printf("Digite a nota 1:");
+					scanf("%f", &sis[i].n1);
+					printf("Digite a nota 2:");
+					scanf("%f", &sis[i].n2);
+					printf("Digite a nota 3:");
+					scanf("%f", &sis[i].n3);
+					printf("Digite a nota 4:");
+					scanf("%f", &sis[i].n4);
+					printf("Digite o nome do aluno:");
+					scanf("%s", sis[i].nome);
+					sis[i].nf = (sis[i].n1 + sis[i].n2 + sis[i].n3 + sis[i].n4) / 4;
+
+
+					i++;
+					r2++;
+					printf("\n\nAluno adcionado!");
+					system("pause");
+					system("cls");
+					break;
+			
+      case 2:
+					system("cls");
+
+					printf("\t\t**Voce selecionou Adiconar via arquivo**\n\n");
+					printf("Digite o nome do arquivo:");
+					scanf("%s", files);
+					arquivo = fopen(files, "r");
+					if (arquivo == NULL) {
+						printf("Problemas na abertura do arquivo\n");
+						system("pause");
+						system("cls");
+						continue;
+					}
+					else
+						while (fscanf(arquivo, "%d %f %f %f %f %s", &sis[i].matricula, &sis[i].n1, &sis[i].n2, &sis[i].n3, &sis[i].n4, sis[i].nome) != EOF) {
+							sis[i].nf = (sis[i].n1 + sis[i].n2 + sis[i].n3 + sis[i].n4) / 4;
+							i++;
+						}
+					fclose(arquivo);
+					r2++;
+					printf("\nAlunos adicionados do arquivo!\n");
+					system("pause");
+					system("cls");
+
+
+					break;
+				default:
+					printf("Opccao invalida!\n\n");
+					system("pause");
+					break;
+				}
+
+			}
+			break;
+		case 2:
+			if (i == 0) {
+				system("cls");
+				printf("\t\t**Nenhum aluno no sistema**\n\n");
+				system("pause");
+				system("cls");
+				
+        break;
+
+
+			}
+			else
+				system("cls");
+			printf("\t\t**Voce selecionou Pesquisar**\n\n");
+			printf("Digite a matricula do aluno:");
+			int matriculaListar;
+			scanf("%d", &matriculaListar);
+
+
+			for (j = 0; j < i; j++) {
+				if (sis[j].matricula == matriculaListar) {
+					printf("\nAluno encontrado:\n");
+					printf("Matricula: %d\n", sis[j].matricula);
+					printf("Nome: %s\n", sis[j].nome);
+					printf("Nota 1: %.2f\n", sis[j].n1);
+					printf("Nota 2: %.2f\n", sis[j].n2);
+					printf("Nota 3: %.2f\n", sis[j].n3);
+					printf("Nota 4: %.2f\n", sis[j].n4);
+					printf("Nota Final: %.2f\n", sis[j].nf);
+					aluno = 1;
+					break;
+				}
+			}
+
+			if (aluno == 0) {
+				printf("\nAluno nao encontrado.\n");
+			}
+
+			system("pause");
+			system("cls");
+			
+      break;
+
+		case 3:
+			if (i == 0) {
+				system("cls");
+				printf("\t\t**Nenhum aluno no sistema**\n\n");
+				system("pause");
+				system("cls");
+				
+        break;
+
+
+
+			}
+			else
+				system("cls");
+			printf("\t\t**Voce selecionou Listar**\n\n");
+			printf("%15s\t\t%15s\t\t%10s\t\t%10s\t\t%10s\t\t%10s\t\t%10s\n", "Matricula", "Nome", "Nota1", "Nota2", "Nota3", "Nota4", "NF");
+			printf("======================================================================================================================================================================================================================================================================================================================================================================================================================================\n");
+
+			for (j = 0; j < i; j++) {
+				printf("%15d\t\t%15s\t\t%10.2f\t\t%10.2f\t\t%10.2f\t\t%10.2f\t\t%10.2f\n", sis[j].matricula, sis[j].nome, sis[j].n1, sis[j].n2, sis[j].n3, sis[j].n4, sis[j].nf);
+				printf("\n\n");
+			}
+			printf("\n\n");
+			system("pause");
+			system("cls");
+			break;
+		case 4:
+			if (i == 0) {
+				system("cls");
+				printf("\t\t**Nenhum aluno no sistema**\n\n");
+				system("pause");
+				system("cls");
+				
+        break;
+
+
+			}
+			else
+				system("cls");
+			printf("\t\t**Voce selecionou Salvar as informacoes em um arquivo texto**\n\n");
+			if (i == 0) {
+				system("cls");
+				printf("\t\t**Nenhum aluno no sistema**\n\n");
+				system("pause");
+				system("cls");
+				break;
+			}
+			else {
+				system("cls");
+				printf("\t\t**Voce selecionou Salvar as informacoes em um arquivo texto**\n\n");
+				printf("Digite o nome do arquivo:");
+				scanf("%s", files);
+				arquivo = fopen(files, "w");
+				if (arquivo == NULL) {
+					printf("Problemas na abertura do arquivo\n");
+					continue;
+				}
+				else {
+					for (j = 0; j < i; j++) {
+						fprintf(arquivo, "%d %.2f %.2f %.2f %.2f %s\n", sis[j].matricula, sis[j].n1, sis[j].n2, sis[j].n3, sis[j].n4, sis[j].nome);
+					}
+					fclose(arquivo);
+					printf("\nInformacoes salvas no arquivo!\n");
+					system("pause");
+					system("cls");
+				}
+			}
+			break;
+
+			system("pause");
+			system("cls");
+			break;
+		case 5:
+			if (i == 0) {
+				system("cls");
+				printf("\t\t**Nenhum aluno no sistema**\n\n");
+				system("pause");
+				system("cls");
+				break;
+
+
+			}
+			else
+				system("cls");
+			printf("\t\t**Voce selecionou Excluir**\n\n");
+			printf("Digite a matricula do aluno que deseja excluir:");
+			int matriculaExcluir;
+			scanf("%d", &matriculaExcluir);
+
+			for (j = 0; j < i; j++) {
+				if (sis[j].matricula == matriculaExcluir) {
+					for (k = j; k <= i; k++) {
+						sis[k] = sis[k + 1];
+					}
+					i--;
+					aluno = 1;
+
+
+					printf("Aluno excluido!\n");
+					
+          break;
+				}
+			}
+
+			if (aluno == 0) {
+				printf("Aluno nao encontrado.\n");
+			}
+
+			system("pause");
+			system("cls");
+			break;
+		case 6:
+			system("cls");
+			printf("\t\t**Voce salvou o seus arquivos?**\n\n");
+			printf("1)sim\n2)nao\n\nOpcao:");
+			scanf("%d", &s);
+			if (s == 1) {
+				printf("\t\t**PROGRAMA FINALIZADO**\n\n");
+			}
+			if (s == 2) {
+				printf("Deseja sair sem salvar?\n");
+				printf("1)sim\n2)nao\n\nOpcao:\n\n");
+				scanf("%d", &s2);
+				if (s2 == 1) {
+					printf("\t\t**PROGRAMA FINALIZADO**\n\n");
+					
+          break;
+
+				}
+				if (s2 == 2) {
+
+					o = 0;
+					system("pause");
+					system("cls");
+					break;
+				}
+
+			}
+
+
+			system("pause");
+			system("cls");
+			break;
+
+		default:
+			system("cls");
+			printf("\t\t**Opcao invalida**\n\n");
+			system("pause");
+			system("cls");
+
+			break;
+
+
+		}
+	}
+
+
+	return 0;
+}
